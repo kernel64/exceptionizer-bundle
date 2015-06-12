@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<xsd:schema xmlns="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle"
+<xsd:schema xmlns="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle/exceptions"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            targetNamespace="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle"
+            targetNamespace="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle/exceptions"
             elementFormDefault="qualified">
 
     <xsd:element name="exceptions" type="exceptions" />
