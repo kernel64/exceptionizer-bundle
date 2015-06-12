@@ -5,6 +5,8 @@
             targetNamespace="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle"
             elementFormDefault="qualified">
 
+    <xsd:element name="exceptions" type="exceptions" />
+
     <xsd:complexType name="exceptions">
         <xsd:choice minOccurs="0" maxOccurs="unbounded">
             <xsd:element name="exception" type="exception" />
