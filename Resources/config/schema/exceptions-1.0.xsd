@@ -1,25 +1,33 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="exceptions">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="exception">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="argument" maxOccurs="unbounded" minOccurs="0">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="xs:string">
-                                            <xs:attribute type="xs:string" name="key" use="optional"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                        <xs:attribute type="xs:string" name="id"/>
-                        <xs:attribute type="xs:string" name="class"/>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-</xs:schema>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="https://raw.githubusercontent.com/kernel64/exceptionizer-bundle"
+            elementFormDefault="qualified">
+
+    <xsd:complexType name="exceptions">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="exception" type="exception" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:group name="configs">
+        <xsd:choice>
+            <xsd:element name="argument" nillable="true" type="element" />
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="exception">
+        <xsd:group ref="configs" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="class" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="element">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="key" type="xsd:string" use="required" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+</xsd:schema>
