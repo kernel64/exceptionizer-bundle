@@ -1,0 +1,6 @@
+mabs_exceptionizer:
+    exceptions:
+        mabs_exceptionizer.base_exception:
+            class: Mabs\ExceptionizerBundle\Exception\BaseException
+            code:  100
+            message: test exception

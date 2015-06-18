@@ -18,7 +18,20 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('exceptionizer');
+        $rootNode = $treeBuilder->root('mabs_exceptionizer');
+        $rootNode
+            ->children()
+                ->arrayNode('exceptions')
+                    ->requiresAtLeastOneElement()
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('class')->isRequired(true)->end()
+                            ->scalarNode('code')->isRequired(false)->end()
+                            ->scalarNode('message')->isRequired(false)->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
