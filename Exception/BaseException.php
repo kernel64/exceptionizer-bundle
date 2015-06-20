@@ -9,10 +9,4 @@ namespace Mabs\ExceptionizerBundle\Exception;
 
 class BaseException extends \Exception
 {
-    public function __construct($message, $file, $line, $code = 0, \Exception $previous = null)
-    {
-        $this->file = $file;
-        $this->line = $line;
-        parent::__construct($message, $code, $previous);
-    }
 }

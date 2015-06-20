@@ -24,15 +24,20 @@ class Exceptionizer
      */
     public function cast($exceptionName, array $args = array())
     {
-        $className = $this->getExceptionClassName($exceptionName);
-        if (!$className) {
+        $exceptionDef = $this->getExceptionDefinition($exceptionName);
+        if (!$exceptionDef) {
             $className = $exceptionName;
+            $exceptionArgs = $args;
+        } else {
+            $className = $exceptionDef['class'];
+            unset($exceptionDef['class']);
+            $exceptionArgs =array_merge($exceptionDef, $args);
         }
 
         $reflector = new \ReflectionClass($className);
 
         /** @var \Exception $exception */
-        $exception = $reflector->newInstanceArgs($args);
+        $exception = $reflector->newInstanceArgs($exceptionArgs);
         throw $exception;
     }
 
@@ -60,12 +65,12 @@ class Exceptionizer
 
     /**
      * @param $exceptionName
-     * @return bool|string
+     * @return bool|mixed
      */
-    protected function getExceptionClassName($exceptionName)
+    protected function getExceptionDefinition($exceptionName)
     {
-        if (isset($this->parameters[$exceptionName])) {
-            return $this->parameters[$exceptionName]['class'];
+        if (isset($this->parameters['exceptions'][$exceptionName])) {
+            return $this->parameters['exceptions'][$exceptionName];
         }
 
         return false;
