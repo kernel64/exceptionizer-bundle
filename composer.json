@@ -1,0 +1,22 @@
+{
+    "name":         "mabs/exceptionizer-bundle",
+    "description":  "This bundle provides a simple way to play with php Exceptions.",
+    "keywords":     ["exception", "exceptionizer", "throw", "catch", "php", "symfony", "bundle"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors":      [
+        {
+            "name":     "Mohamed Aymen Ben Slimane",
+            "email":    "med.aymen3@gmail.com"
+        }
+    ],
+    "require":      {
+        "php": ">=5.3.9",
+        "symfony/framework-bundle": ">=2.1"
+    },
+    "autoload": {
+        "psr-0": {"Mabs\\ExceptionizerBundle": ""}
+    },
+    "target-dir": "Mabs/ExceptionizerBundle",
+    "minimum-stability": "dev"
+}
