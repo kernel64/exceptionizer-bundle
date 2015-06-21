@@ -6,73 +6,84 @@
 
 namespace Mabs\ExceptionizerBundle\Service;
 
+use Mabs\ExceptionizerBundle\Exceptionizer\Common\ThrowerInterface;
+use Mabs\ExceptionizerBundle\Exceptionizer\Common\CatcherInterface;
 
 class Exceptionizer
 {
-
+    /**
+     * @var mixed
+     */
     private $parameters;
 
-    public function __construct($parameters)
+    /**
+     * @var \Mabs\ExceptionizerBundle\Exceptionizer\Common\ThrowerInterface $thrower
+     */
+    private $thrower;
+
+    /**
+     * @var \Mabs\ExceptionizerBundle\Exceptionizer\Common\CatcherInterface $catcher
+     */
+    private $catcher;
+
+    public function __construct(ThrowerInterface $thrower, CatcherInterface $catcher, $parameters)
     {
+        $this->thrower = $thrower;
+        $this->catcher = $catcher;
         $this->parameters = $parameters;
     }
 
     /**
-     * @param $exceptionName
+     * @param string $exceptionName
      * @param array $args
      * @throws \Exception
      */
-    public function cast($exceptionName, array $args = array())
+    public function throwException($exceptionName, array $args = array())
     {
-        $exceptionDef = $this->getExceptionDefinition($exceptionName);
-        if (!$exceptionDef) {
-            $className = $exceptionName;
-            $exceptionArgs = $args;
-        } else {
-            $className = $exceptionDef['class'];
-            unset($exceptionDef['class']);
-            $exceptionArgs =array_merge($exceptionDef, $args);
-        }
+        $className = $this->getExceptionClassName($exceptionName);
+        $exceptionArgs = $this->getExceptionArguments($exceptionName);
+        $exceptionArgs = array_merge($exceptionArgs, $args);
 
-        $reflector = new \ReflectionClass($className);
-
-        /** @var \Exception $exception */
-        $exception = $reflector->newInstanceArgs($exceptionArgs);
-        throw $exception;
+        $this->thrower->cast($className, $exceptionArgs);
     }
 
     /**
      * @param $exceptionName
      * @param callable $callback
-     * @param bool $thowOthers
      * @return bool
-     * @throws \Exception
      */
-    public function trap($exceptionName, \Closure $callback, $thowOthers = false)
+    public function catchException($exceptionName, \Closure $callback)
     {
-        try {
-            call_user_func($callback);
-        } catch (\Exception $e) {
-            if (get_class($e) === $exceptionName) {
-                return true;
-            } elseif ($thowOthers === true) {
-                $this->cast($exceptionName, $e->getMessage(), $e->getCode(), $e->getPrevious());
-            }
-        }
+        $className = $this->getExceptionClassName($exceptionName);
 
-        return false;
+        return $this->catcher->trap($className, $callback);
     }
 
     /**
      * @param $exceptionName
-     * @return bool|mixed
+     * @return string
      */
-    protected function getExceptionDefinition($exceptionName)
+    protected function getExceptionClassName($exceptionName)
     {
         if (isset($this->parameters['exceptions'][$exceptionName])) {
-            return $this->parameters['exceptions'][$exceptionName];
+            return $this->parameters['exceptions'][$exceptionName]['class'];
         }
 
-        return false;
+        return $exceptionName;
+    }
+
+    /**
+     * @param $exceptionName
+     * @return mixed
+     */
+    protected function getExceptionArguments($exceptionName)
+    {
+        if (isset($this->parameters['exceptions'][$exceptionName])
+            && isset($this->parameters['exceptions'][$exceptionName]['arguments'])
+        ) {
+            return $this->parameters['exceptions'][$exceptionName]['arguments'];
+        }
+
+        return array();
     }
 }

@@ -5,7 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="exceptionizer.thrower" class="Mabs\ExceptionizerBundle\Exceptionizer\Thrower">
+        </service>
+        <service id="exceptionizer.carcher" class="Mabs\ExceptionizerBundle\Exceptionizer\Catcher">
+        </service>
         <service id="exceptionizer" class="Mabs\ExceptionizerBundle\Service\Exceptionizer">
+            <argument type="service" id="exceptionizer.thrower"/>
+            <argument type="service" id="exceptionizer.carcher"/>
             <argument>%mabs_exceptionizer%</argument>
         </service>
     </services>

@@ -21,16 +21,15 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('mabs_exceptionizer');
         $rootNode
             ->children()
-                ->arrayNode('exceptions')
-                    ->requiresAtLeastOneElement()
-                    ->prototype('array')
-                        ->children()
-                            ->scalarNode('class')->isRequired(true)->end()
-                            ->scalarNode('code')->isRequired(false)->end()
-                            ->scalarNode('message')->isRequired(false)->end()
-                        ->end()
-                    ->end()
-                ->end()
+            ->arrayNode('exceptions')
+            ->requiresAtLeastOneElement()
+            ->prototype('array')
+            ->children()
+            ->scalarNode('class')->isRequired(true)->end()
+            ->variableNode('arguments')->end()
+            ->end()
+            ->end()
+            ->end()
             ->end();
 
         // Here you should define the parameters that are allowed to
