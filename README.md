@@ -1,4 +1,4 @@
-# exceptionizer-bundle
+# exceptionizer-bundle     [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2e3ac29c-b1b7-49c0-86af-6349b58d4b88/big.png)](https://insight.sensiolabs.com/projects/2e3ac29c-b1b7-49c0-86af-6349b58d4b88)
 
 [![Build Status](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/?branch=master)
 
