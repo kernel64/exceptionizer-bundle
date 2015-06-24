@@ -14,3 +14,41 @@ entry in your `composer.json` and update the `composer.lock` as well.
 $ composer require 'mabs/exceptionizer-bundle'
 ```
 
+Then, you can enable it in your kernel:
+
+```php
+// app/AppKernel.php
+public function registerBundles()
+{
+    $bundles = array(
+        ...
+        new Mabs\ExceptionizerBundle\MabsExceptionizerBundle(),
+        ...
+```
+
+##Usage
+
+Now you can use Exceptionizer service to throw Exceptions:
+
+```php
+$this->container->get('exceptionizer')
+->throwException('\\Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException', array('Message'));
+```
+
+OR define your Exception in your config.yml file like this :
+
+```yml
+mabs_exceptionizer:
+    exceptions:
+        bar_code_exception:
+            class: Mabs\BarCodeBundle\Exception\BarCodeException
+            arguments:
+                message: "bar code exception"
+                code:  0
+```
+
+and pass the config key to the service:
+
+```php
+$this->container->get('exceptionizer')->throwException('bar_code_exception');
+```
