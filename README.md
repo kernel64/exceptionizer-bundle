@@ -1,6 +1,6 @@
 # exceptionizer-bundle
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kernel64/exceptionizer-bundle/?branch=master)
 
 Play with Exceptions :D
 This bundle help to get a low coupling between exception class object in your code
