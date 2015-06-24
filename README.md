@@ -42,9 +42,9 @@ mabs_exceptionizer:
     exceptions:
         bar_code_exception:
             class: Mabs\BarCodeBundle\Exception\BarCodeException
-            arguments:
-                message: "bar code exception"
-                code:  0
+            arguments:                          # optional
+                message: "bar code exception"   # optional
+                code:  0                        # optional
 ```
 
 and pass the config key to the service:
