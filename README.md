@@ -28,7 +28,7 @@ public function registerBundles()
         ...
 ```
 
-##Usage
+## Usage
 
 Now you can use Exceptionizer service to throw Exceptions:
 
@@ -54,3 +54,7 @@ and pass the config key to the service:
 ```php
 $this->container->get('exceptionizer')->throwException('bar_code_exception');
 ```
+
+## License
+
+  This bundle is available under the [MIT license](LICENSE).
