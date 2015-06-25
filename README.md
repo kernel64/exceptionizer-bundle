@@ -34,7 +34,7 @@ Now you can use Exceptionizer service to throw Exceptions:
 
 ```php
 $this->container->get('exceptionizer')
-->throwException('\\Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException', array('Message'));
+->throwException('\\Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException', array('Your message'));
 ```
 
 OR define your Exception in your config.yml file like this :
