@@ -5,3 +5,7 @@ mabs_exceptionizer:
             arguments:
                 message: "test exception"
                 code:  100
+        access_denied_excetion:
+            class: Symfony\Component\Security\Core\Exception\AccessDeniedException
+        not_found_http_exception:
+            class: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
