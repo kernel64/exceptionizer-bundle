@@ -9,3 +9,5 @@ mabs_exceptionizer:
             class: Symfony\Component\Security\Core\Exception\AccessDeniedException
         not_found_http_exception:
             class: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+        logical_exception:
+            class: \LogicException
