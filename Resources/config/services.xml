@@ -6,12 +6,14 @@
 
     <services>
         <service id="exceptionizer.thrower" class="Mabs\ExceptionizerBundle\Exceptionizer\Thrower">
+            <argument type="service" id="event_dispatcher"/>
         </service>
-        <service id="exceptionizer.carcher" class="Mabs\ExceptionizerBundle\Exceptionizer\Catcher">
+        <service id="exceptionizer.catcher" class="Mabs\ExceptionizerBundle\Exceptionizer\Catcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
         <service id="exceptionizer" class="Mabs\ExceptionizerBundle\Service\Exceptionizer">
             <argument type="service" id="exceptionizer.thrower"/>
-            <argument type="service" id="exceptionizer.carcher"/>
+            <argument type="service" id="exceptionizer.catcher"/>
             <argument>%mabs_exceptionizer%</argument>
         </service>
     </services>

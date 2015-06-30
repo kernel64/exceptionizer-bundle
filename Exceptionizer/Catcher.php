@@ -7,9 +7,17 @@
 
 namespace Mabs\ExceptionizerBundle\Exceptionizer;
 
+use Mabs\ExceptionizerBundle\Event\FilterExceptionizerEvent;
+use Mabs\ExceptionizerBundle\ExceptionizerEvents;
 
 class Catcher implements Common\CatcherInterface
 {
+    private $dispatcher;
+
+    function __construct($eventDispatcher)
+    {
+        $this->dispatcher = $eventDispatcher;
+    }
 
     /**
      * @param string $className
@@ -22,11 +30,21 @@ class Catcher implements Common\CatcherInterface
         try {
             call_user_func($callback);
         } catch (\Exception $e) {
+            $this->dispatchPostCatch($e);
             if (get_class($e) === $className) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @param \Exception $exception
+     */
+    protected function dispatchPostCatch($exception)
+    {
+        $event = new FilterExceptionizerEvent($exception);
+        $this->dispatcher->dispatch(ExceptionizerEvents::Exceptionizer_POST_CATCH, $event);
     }
 }

@@ -6,9 +6,17 @@
 
 namespace Mabs\ExceptionizerBundle\Exceptionizer;
 
+use Mabs\ExceptionizerBundle\Event\FilterExceptionizerEvent;
+use Mabs\ExceptionizerBundle\ExceptionizerEvents;
 
 class Thrower implements Common\ThrowerInterface
 {
+    private $dispatcher;
+
+    function __construct($eventDispatcher)
+    {
+        $this->dispatcher = $eventDispatcher;
+    }
 
     /**
      * @param string $className
@@ -20,6 +28,17 @@ class Thrower implements Common\ThrowerInterface
         $reflector = new \ReflectionClass($className);
         /** @var \Exception $exception */
         $exception = $reflector->newInstanceArgs($args);
+        $this->dispatchPreThrow($exception);
+
         throw $exception;
+    }
+
+    /**
+     * @param \Exception $exception
+     */
+    protected function dispatchPreThrow($exception)
+    {
+        $event = new FilterExceptionizerEvent($exception);
+        $this->dispatcher->dispatch(ExceptionizerEvents::Exceptionizer_PRE_THROW, $event);
     }
 }
