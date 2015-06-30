@@ -8,7 +8,8 @@
 namespace Mabs\ExceptionizerBundle;
 
 
-final class ExceptionizerEvents {
+final class ExceptionizerEvents
+{
 
     const Exceptionizer_PRE_THROW = 'exceptionizer.pre_throw';
 

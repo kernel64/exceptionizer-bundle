@@ -22,4 +22,3 @@ class FilterExceptionizerEvent extends Event
         return $this->exception;
     }
 }
- 
