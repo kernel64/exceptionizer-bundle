@@ -11,7 +11,7 @@ namespace Mabs\ExceptionizerBundle;
 final class ExceptionizerEvents
 {
 
-    const Exceptionizer_PRE_THROW = 'exceptionizer.pre_throw';
+    const EXCEPTIONIZER_PRE_THROW = 'exceptionizer.pre_throw';
 
-    const Exceptionizer_POST_CATCH = 'exceptionizer.post_catch';
+    const EXCEPTIONIZER_POST_CATCH = 'exceptionizer.post_catch';
 }

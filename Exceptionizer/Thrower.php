@@ -39,6 +39,6 @@ class Thrower implements Common\ThrowerInterface
     protected function dispatchPreThrow($exception)
     {
         $event = new FilterExceptionizerEvent($exception);
-        $this->dispatcher->dispatch(ExceptionizerEvents::Exceptionizer_PRE_THROW, $event);
+        $this->dispatcher->dispatch(ExceptionizerEvents::EXCEPTIONIZER_PRE_THROW, $event);
     }
 }

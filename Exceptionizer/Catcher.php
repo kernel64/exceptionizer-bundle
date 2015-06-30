@@ -45,6 +45,6 @@ class Catcher implements Common\CatcherInterface
     protected function dispatchPostCatch($exception)
     {
         $event = new FilterExceptionizerEvent($exception);
-        $this->dispatcher->dispatch(ExceptionizerEvents::Exceptionizer_POST_CATCH, $event);
+        $this->dispatcher->dispatch(ExceptionizerEvents::EXCEPTIONIZER_POST_CATCH, $event);
     }
 }
