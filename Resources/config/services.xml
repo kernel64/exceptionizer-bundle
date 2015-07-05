@@ -16,5 +16,9 @@
             <argument type="service" id="exceptionizer.catcher"/>
             <argument>%mabs_exceptionizer%</argument>
         </service>
+        <service id="exceptionizer.listener" class="Mabs\ExceptionizerBundle\EventListener\MabsExceptionizerListener">
+            <argument type="service" id="logger"/>
+            <tag name="kernel.event_listener" event="exceptionizer.pre_throw" method="onPreThrowException" />
+        </service>
     </services>
 </container>
