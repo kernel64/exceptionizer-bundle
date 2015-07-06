@@ -55,6 +55,29 @@ and pass the config key to the service:
 $this->container->get('exceptionizer')->throwException('bar_code_exception');
 ```
 
+# Events and listener:
+
+ExceptionizerBundle provide two events:
+
+```php
+namespace Mabs\ExceptionizerBundle;
+
+
+final class ExceptionizerEvents
+{
+
+    const EXCEPTIONIZER_PRE_THROW = 'exceptionizer.pre_throw';
+
+    const EXCEPTIONIZER_POST_CATCH = 'exceptionizer.post_catch';
+}
+```
+
+<b>exceptionizer.pre_throw</b> :    before throw Exception
+
+<b>exceptionizer.post_catch</b>:    (will be documented later when we speak about the Exception Catcher)
+
+Now you can create Listeners to do a specific job when an exception will be thrown ;) and to learn more about the EventDispatcher Component in symfony2 pleaze read [the documentation](http://symfony.com/doc/current/components/event_dispatcher/introduction.html)
+
 ## License
 
   This bundle is available under the [MIT license](LICENSE).
